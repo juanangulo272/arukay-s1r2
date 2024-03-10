@@ -1,3 +1,16 @@
+info.onCountdownEnd(function () {
+    game.gameOver(true)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
+    mySprite3.setPosition(randint(10, 110), randint(10, 110))
+    info.changeScoreBy(4)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    mySprite2.setPosition(randint(10, 110), randint(10, 110))
+    info.changeScoreBy(4)
+})
+let mySprite3: Sprite = null
+let mySprite2: Sprite = null
 scene.setBackgroundColor(9)
 let mySprite = sprites.create(img`
     . . . . . . . . . . . . . . . . 
@@ -17,7 +30,8 @@ let mySprite = sprites.create(img`
     . . . . f f f f . . . . f f f . 
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Player)
-let mySprite2 = sprites.create(img`
+mySprite.setPosition(10, 10)
+mySprite2 = sprites.create(img`
     . . . e e e e . . . . . . . . . 
     . . . e . . e . . . . . . . . . 
     . . . e . . e . . . . . . . . . 
@@ -34,8 +48,9 @@ let mySprite2 = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
-    `, SpriteKind.Player)
-let mySprite3 = sprites.create(img`
+    `, SpriteKind.Projectile)
+mySprite2.setPosition(randint(10, 110), randint(10, 110))
+mySprite3 = sprites.create(img`
     . . . e e e e . . . . . . . . . 
     . . . e . . e . . . . . . . . . 
     . . . e . . e . . . . . . . . . 
@@ -52,4 +67,8 @@ let mySprite3 = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
-    `, SpriteKind.Player)
+    `, SpriteKind.Food)
+mySprite3.setPosition(randint(10, 110), randint(10, 110))
+controller.moveSprite(mySprite)
+info.setScore(0)
+info.startCountdown(60)
